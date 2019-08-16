@@ -8,7 +8,7 @@ import passport from 'passport';
 
 const app = express();
 
-const API_PORT = process.env.API_PORT || 3000;
+const API_PORT = process.env.API_PORT || 3003;
 
 const swaggerDefinition = {
   info: {
@@ -62,6 +62,3 @@ require('./routes/updateUser')(app);
 app.listen(API_PORT, () => console.log(`Listening on port ${API_PORT}`));
 
 module.exports = app;
-
-some sort of ale
-</shoppingList >
