@@ -1,0 +1,6 @@
+**/node_modules/
+docker/data/db/**
+.vscode/
+.idea/
+.env
+config/jwtConfig.js
