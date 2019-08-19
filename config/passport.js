@@ -99,6 +99,7 @@ const opts = {
     secretOrKey: jwtSecret.secret,
 };
 
+
 passport.use(
     'jwt',
     new JWTstrategy(opts, (jwt_payload, done) => {
