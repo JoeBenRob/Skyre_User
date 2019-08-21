@@ -17,7 +17,7 @@ router.get('/getBasicCitizens', (req, res, next) => {
             let forenames = "forenames=" + req.query.forenames + "&";
             let surname = "surname=" + req.query.surname;
             let toSend = "" + forenames + surname;
-            axios.get(`http://52.137.47.18:8081/Citizen/getCitizens?${toSend}`)
+            axios.get(`http://localhost:9001/core/citizen/${toSend}`)
                 .then(response => {
                     res.json(response.data);
                 }).catch(err => {
@@ -47,7 +47,7 @@ router.get('/getAdvCitizens', (req, res, next) => {
             let isex = "sex=" + req.query.sex;
             let appender = "" + iforenames + isurname + icitizenId + ihomeAddress + idateOfBirth + iplaceOfBirth + isex;
             console.log(appender);
-            axios.get(`http://52.137.47.18:8081/Citizen/getCitizens?${appender}`)
+            axios.get(`http://localhost:9001/core/citizen/${toSend}`)
                 .then(response => {
                     res.json(response.data);
                 }).catch(err => {
