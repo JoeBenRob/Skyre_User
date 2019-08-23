@@ -201,4 +201,26 @@ router.get('/getTransactions', (req, res, next) => {
     })(req, res, next);
 })
 
+router.get('/getCitizenFromRegistration', (req, res, next) => {
+    passport.authenticate('jwt', { session: false }, (err, user, info) => {
+        if (err) {
+            console.log(err);
+        }
+        if (info !== undefined) {
+            console.log(info.message);
+            console.log(info);
+            res.status(401).send(info.message);
+        } else {
+            let vehicleRegistrationNo = (req.query.vehicleRegistrationNo ? "vehicleRegistrationNo=" + req.query.vehicleRegistrationNo + "&":"");
+            console.log("Vehicle Registration " + vehicleRegistrationNo);
+            axios.get(`http://localhost:9001/core/citizenFromRegistration/${vehicleRegistrationNo}`)
+                .then(response => {
+                    res.json(response.data);
+                }).catch(err => {
+                    console.log(err);
+                });
+        }
+    })(req, res, next);
+})
+
 module.exports = router;
