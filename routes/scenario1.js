@@ -3,6 +3,11 @@ const router = express.Router();
 const axios = require('axios');
 import passport from 'passport';
 
+const citizen_url = "http://localhost:9001/core/citizen/"
+const finance_url = "http://localhost:9001/core/finance/"
+const mobile_url = "http://localhost:9001/core/mobile/"
+const vehicle_url = "http://localhost:9001/core/anpr/"
+
 router.get('/getBasicCitizens', (req, res, next) => {
 
     passport.authenticate('jwt', { session: false }, (err, user, info) => {
@@ -18,7 +23,7 @@ router.get('/getBasicCitizens', (req, res, next) => {
             let surname = "surname=" + req.query.surname;
             let toSend = "" + forenames + surname;
             console.log("1 " + toSend);
-            axios.get(`http://localhost:9001/core/citizen/${toSend}`)
+            axios.get(`${citizen_url}${toSend}`)
                 .then(response => {
                     console.log("2 " + response.data);
                     res.json(response.data);
@@ -49,7 +54,7 @@ router.get('/getAdvCitizens', (req, res, next) => {
             let isex = "sex=" + req.query.sex;
             let toSend = "" + iforenames + isurname + icitizenId + ihomeAddress + idateOfBirth + iplaceOfBirth + isex;
 
-            axios.get(`http://localhost:9001/core/citizen/${toSend}`)
+            axios.get(`${citizen_url_url}${toSend}`)
                 .then(response => {
                     res.json(response.data);
                 }).catch(err => {
@@ -73,7 +78,7 @@ router.get('/getFinance', (req, res, next) => {
             let surname = "surname=" + req.query.surname + "&";
             let toSend = "" + forenames + surname;
             console.log("22" + toSend);
-            axios.get(`http://localhost:9001/core/finance/${toSend}`)
+            axios.get(`${finance_url}${toSend}`)
                 .then(response => {
                     console.log("MOBILE")
                     for (let i = 0; i < response.data.length; i++) {
@@ -101,7 +106,7 @@ router.get('/getMobile', (req, res, next) => {
             let isurname = "surname=" + req.query.surname;
             let toSend = "" + iforenames + isurname;
             console.log("MOBILE 1 " + toSend);
-            axios.get(`http://localhost:9001/core/mobile/${toSend}`)
+            axios.get(`${mobile_url}${toSend}`)
                 .then(response => {
                     res.json(response.data);
                 }).catch(err => {
@@ -125,7 +130,7 @@ router.get('/getVehicle', (req, res, next) => {
             let isurname = "surname=" + req.query.surname;
             let toSend = "" + iforenames + isurname;
 
-            axios.get(`http://localhost:9001/core/anpr/${toSend}`)
+            axios.get(`${vehicle_url}${toSend}`)
                 .then(response => {
                     res.json(response.data);
                 }).catch(err => {
