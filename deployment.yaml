@@ -1,0 +1,25 @@
+  
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skyre-user
+  labels: 
+    app: skyre-user
+spec:
+  selector:
+    matchLabels:
+      app: skyre-user
+  template:
+    metadata:
+      labels:
+        app: skyre-user
+      spec:
+      containers:
+      - name: skyre-user
+        image: eyjafjalla/sykre-user:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9003
+        env:
+        - name: SERVER_PORT
+          value: "9003"
