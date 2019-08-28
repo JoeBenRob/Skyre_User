@@ -2,11 +2,16 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 import passport from 'passport';
+// local
+//const citizen_url = "http://localhost:9001/core/citizen/"
+//const finance_url = "http://localhost:9001/core/finance/"
+//const mobile_url = "http://localhost:9001/core/mobile/"
+//const vehicle_url = "http://localhost:9001/core/anpr/"
 
-const citizen_url = "http://localhost:9001/core/citizen/"
-const finance_url = "http://localhost:9001/core/finance/"
-const mobile_url = "http://localhost:9001/core/mobile/"
-const vehicle_url = "http://localhost:9001/core/anpr/"
+const citizen_url = "http://user:9001/core/citizen/"
+const finance_url = "http://user:9001/core/finance/"
+const mobile_url = "http://user:9001/core/mobile/"
+const vehicle_url = "http://user:9001/core/anpr/"
 
 router.get('/getBasicCitizens', (req, res, next) => {
 
