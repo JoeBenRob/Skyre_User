@@ -57,7 +57,7 @@ router.get('/getAdvCitizens', (req, res, next) => {
             let sex = (req.query.sex ? "sex=" + req.query.sex:"");
             let toSend = "" + forenames + surname + citizenId + homeAddress + dateOfBirth + placeOfBirth + sex;
 
-            axios.get(`${citizen_url_url}${toSend}`, {
+            axios.get(`${citizen_url}${toSend}`, {
                 headers: { username: `${req.query.username}` },
             })
                 .then(response => {
