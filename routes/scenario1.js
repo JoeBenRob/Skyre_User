@@ -17,8 +17,11 @@ router.get('/getBasicCitizens', (req, res, next) => {
             let forenames = (req.query.forenames ? "forenames=" + req.query.forenames + "&":"");
             let surname = (req.query.surname ? "surname=" + req.query.surname : "");
             let toSend = "" + forenames + surname;
+            console.log(req.query.username);
             console.log("1 " + toSend);
-            axios.get(`http://localhost:9001/core/citizen/${toSend}`)
+            axios.get(`http://localhost:9001/core/citizen/${toSend}`, {
+                headers: { username: `${req.query.username}` },
+            })
                 .then(response => {
                     console.log("2 " + response.data);
                     res.json(response.data);
@@ -49,7 +52,9 @@ router.get('/getAdvCitizens', (req, res, next) => {
             let sex = (req.query.sex ? "sex=" + req.query.sex:"");
             let toSend = "" + forenames + surname + citizenId + homeAddress + dateOfBirth + placeOfBirth + sex;
 
-            axios.get(`http://localhost:9001/core/citizen/${toSend}`)
+            axios.get(`http://localhost:9001/core/citizen/${toSend}`, {
+                headers: { username: `${req.query.username}` },
+            })
                 .then(response => {
                     res.json(response.data);
                 }).catch(err => {
@@ -73,7 +78,9 @@ router.get('/getFinance', (req, res, next) => {
             let surname = (req.query.surname ? "surname=" + req.query.surname : "");
             let toSend = "" + forenames + surname;
             console.log("22" + toSend);
-            axios.get(`http://localhost:9001/core/finance/${toSend}`)
+            axios.get(`http://localhost:9001/core/finance/${toSend}`, {
+                headers: { username: `${req.query.username}` },
+            })
                 .then(response => {
                     console.log("MOBILE")
                     for (let i = 0; i < response.data.length; i++) {
@@ -101,7 +108,9 @@ router.get('/getMobile', (req, res, next) => {
             let surname = (req.query.surname ? "surname=" + req.query.surname : "");
             let toSend = "" + forenames + surname;
             console.log("MOBILE 1 " + toSend);
-            axios.get(`http://localhost:9001/core/mobile/${toSend}`)
+            axios.get(`http://localhost:9001/core/mobile/${toSend}`, {
+                headers: { username: `${req.query.username}` },
+            })
                 .then(response => {
                     res.json(response.data);
                 }).catch(err => {
@@ -125,7 +134,9 @@ router.get('/getVehicle', (req, res, next) => {
             let surname = (req.query.surname ? "surname=" + req.query.surname : "");
             let toSend = "" + forenames + surname;
 
-            axios.get(`http://localhost:9001/core/anpr/${toSend}`)
+            axios.get(`http://localhost:9001/core/anpr/${toSend}`, {
+                headers: { username: `${req.query.username}` },
+            })
                 .then(response => {
                     res.json(response.data);
                 }).catch(err => {
@@ -147,7 +158,9 @@ router.get('/getAssociates', (req, res, next) => {
         } else {
             let phoneNumber = (req.query.phoneNumber ? "phoneNumber=" + req.query.phoneNumber + "&":"");
             console.log("ASSOCIATE PHONE " + phoneNumber);
-            axios.get(`http://localhost:9001/core/associate/${phoneNumber}`)
+            axios.get(`http://localhost:9001/core/associate/${phoneNumber}`, {
+                headers: { username: `${req.query.username}` },
+            })
                 .then(response => {
                     res.json(response.data);
                 }).catch(err => {
@@ -169,7 +182,9 @@ router.get('/getVehicleLocation', (req, res, next) => {
         } else {
             let regNo = (req.query.vehicleRegistrationNo ? "vehicleRegistrationNo=" + req.query.vehicleRegistrationNo + "&":"");
             console.log("REG NO " + regNo);
-            axios.get(`http://localhost:9001/core/vehicleLocation/${regNo}`)
+            axios.get(`http://localhost:9001/core/vehicleLocation/${regNo}`, {
+                headers: { username: `${req.query.username}` },
+            })
                 .then(response => {
                     res.json(response.data);
                 }).catch(err => {
@@ -191,7 +206,9 @@ router.get('/getTransactions', (req, res, next) => {
         } else {
             let accountNumber = (req.query.accountNumber ? "accountNumber=" + req.query.accountNumber + "&":"");
             console.log("Account Number " + accountNumber);
-            axios.get(`http://localhost:9001/core/transactions/${accountNumber}`)
+            axios.get(`http://localhost:9001/core/transactions/${accountNumber}`, {
+                headers: { username: `${req.query.username}` },
+            })
                 .then(response => {
                     res.json(response.data);
                 }).catch(err => {
@@ -213,7 +230,54 @@ router.get('/getCitizenFromRegistration', (req, res, next) => {
         } else {
             let vehicleRegistrationNo = (req.query.vehicleRegistrationNo ? "vehicleRegistrationNo=" + req.query.vehicleRegistrationNo + "&":"");
             console.log("Vehicle Registration " + vehicleRegistrationNo);
-            axios.get(`http://localhost:9001/core/citizenFromRegistration/${vehicleRegistrationNo}`)
+            axios.get(`http://localhost:9001/core/citizenFromRegistration/${vehicleRegistrationNo}`, {
+                headers: { username: `${req.query.username}` },
+            })
+                .then(response => {
+                    res.json(response.data);
+                }).catch(err => {
+                    console.log(err);
+                });
+        }
+    })(req, res, next);
+})
+
+router.get('/getCases', (req, res, next) => {
+    passport.authenticate('jwt', { session: false }, (err, user, info) => {
+        if (err) {
+            console.log(err);
+        }
+        if (info !== undefined) {
+            console.log(info.message);
+            console.log(info);
+            res.status(401).send(info.message);
+        } else {
+            axios.get(`http://localhost:9001/core/cases/`, {
+                headers: { username: `${req.query.username}` },
+            })
+                .then(response => {
+                    res.json(response.data);
+                }).catch(err => {
+                    console.log(err);
+                });
+        }
+    })(req, res, next);
+})
+
+router.post('/postCase', (req, res, next) => {
+    passport.authenticate('jwt', { session: false }, (err, user, info) => {
+        if (err) {
+            console.log(err);
+        }
+        if (info !== undefined) {
+            console.log(info.message);
+            console.log(info);
+            res.status(401).send(info.message);
+        } else {
+            console.log("USERNAME" + req.query.username)
+            axios.post(`http://localhost:9001/core/postCase`, req.body, {
+                headers: { username: `${req.query.username}` },
+            })
                 .then(response => {
                     res.json(response.data);
                 }).catch(err => {
