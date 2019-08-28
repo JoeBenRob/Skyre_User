@@ -2,8 +2,7 @@ import Sequelize from 'sequelize';
 import UserModel from './models/user';
 
 const sequelize = new Sequelize('users', 'test', 'test1234', {
-  host: 'localhost',
-  port: 3306,
+  host: 'db',
   dialect: 'mysql',
 });
 
