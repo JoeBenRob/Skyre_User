@@ -8,10 +8,10 @@ import passport from 'passport';
 //const mobile_url = "http://localhost:9001/core/mobile/"
 //const vehicle_url = "http://localhost:9001/core/anpr/"
 
-const citizen_url = "http://core:9001/citizen/"
-const finance_url = "http://core:9001/finance/"
-const mobile_url = "http://core:9001/mobile/"
-const vehicle_url = "http://core:9001/anpr/"
+const citizen_url = "http://core:9001/core/citizen/"
+const finance_url = "http://core:9001/core/finance/"
+const mobile_url = "http://core:9001/core/mobile/"
+const vehicle_url = "http://core:9001/core/anpr/"
 
 router.get('/getBasicCitizens', (req, res, next) => {
 
