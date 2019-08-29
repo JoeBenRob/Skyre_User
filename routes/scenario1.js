@@ -7,6 +7,7 @@ const citizen_url = "http://core:9001/core/citizen/"
 const finance_url = "http://core:9001/core/finance/"
 const mobile_url = "http://core:9001/core/mobile/"
 const vehicle_url = "http://core:9001/core/anpr/"
+const case_url = "http://core:9001/core/case/"
 
 router.get('/getBasicCitizens', (req, res, next) => {
 
@@ -163,7 +164,7 @@ router.get('/getAssociates', (req, res, next) => {
         } else {
             let phoneNumber = (req.query.phoneNumber ? "phoneNumber=" + req.query.phoneNumber + "&":"");
             console.log("ASSOCIATE PHONE " + phoneNumber);
-            axios.get(`http://localhost:9001/core/associate/${phoneNumber}`, {
+            axios.get(`http://core:9001/core/associate/${phoneNumber}`, {
                 headers: { username: `${req.query.username}` },
             })
                 .then(response => {
@@ -187,7 +188,7 @@ router.get('/getVehicleLocation', (req, res, next) => {
         } else {
             let regNo = (req.query.vehicleRegistrationNo ? "vehicleRegistrationNo=" + req.query.vehicleRegistrationNo + "&":"");
             console.log("REG NO " + regNo);
-            axios.get(`http://localhost:9001/core/vehicleLocation/${regNo}`, {
+            axios.get(`http://core:9001/core/vehicleLocation/${regNo}`, {
                 headers: { username: `${req.query.username}` },
             })
                 .then(response => {
@@ -211,7 +212,7 @@ router.get('/getTransactions', (req, res, next) => {
         } else {
             let accountNumber = (req.query.accountNumber ? "accountNumber=" + req.query.accountNumber + "&":"");
             console.log("Account Number " + accountNumber);
-            axios.get(`http://localhost:9001/core/transactions/${accountNumber}`, {
+            axios.get(`http://core:9001/core/transactions/${accountNumber}`, {
                 headers: { username: `${req.query.username}` },
             })
                 .then(response => {
@@ -235,7 +236,7 @@ router.get('/getCitizenFromRegistration', (req, res, next) => {
         } else {
             let vehicleRegistrationNo = (req.query.vehicleRegistrationNo ? "vehicleRegistrationNo=" + req.query.vehicleRegistrationNo + "&":"");
             console.log("Vehicle Registration " + vehicleRegistrationNo);
-            axios.get(`http://localhost:9001/core/citizenFromRegistration/${vehicleRegistrationNo}`, {
+            axios.get(`http://core:9001/core/citizenFromRegistration/${vehicleRegistrationNo}`, {
                 headers: { username: `${req.query.username}` },
             })
                 .then(response => {
@@ -257,7 +258,7 @@ router.get('/getCases', (req, res, next) => {
             console.log(info);
             res.status(401).send(info.message);
         } else {
-            axios.get(`http://localhost:9001/core/cases/`, {
+            axios.get(`http://core:9001/core/cases/`, {
                 headers: { username: `${req.query.username}` },
             })
                 .then(response => {
@@ -280,7 +281,7 @@ router.post('/postCase', (req, res, next) => {
             res.status(401).send(info.message);
         } else {
             console.log("USERNAME" + req.query.username)
-            axios.post(`http://localhost:9001/core/postCase`, req.body, {
+            axios.post(`http://core:9001/core/postCase`, req.body, {
                 headers: { username: `${req.query.username}` },
             })
                 .then(response => {
