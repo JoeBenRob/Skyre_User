@@ -3,7 +3,6 @@ import UserModel from './models/user';
 
 const sequelize = new Sequelize('users', 'test', 'test1234', {
   host: 'db',
-  port: '3306',
   dialect: 'mysql',
 });
 
