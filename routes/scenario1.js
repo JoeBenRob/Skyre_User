@@ -80,8 +80,10 @@ router.get('/getFinance', (req, res, next) => {
             res.status(401).send(info.message);
         } else {
             let forenames = (req.query.forenames ? "forenames=" + req.query.forenames + "&":"");
-            let surname = (req.query.surname ? "surname=" + req.query.surname : "");
-            let toSend = "" + forenames + surname;
+            let surname = (req.query.surname ? "surname=" + req.query.surname + "&": "");
+            let homeAddress = (req.query.homeAddress ? "homeAddress=" + req.query.homeAddress + "&": "");
+            let dateOfBirth = (req.query.dateOfBirth ? "dateOfBirth=" + req.query.dateOfBirth + "&": "");
+            let toSend = "" + forenames + surname + homeAddress + dateOfBirth;
             console.log("22" + toSend);
             axios.get(`${finance_url}${toSend}`, {
                 headers: { username: `${req.query.username}` },
@@ -110,8 +112,10 @@ router.get('/getMobile', (req, res, next) => {
             res.status(401).send(info.message);
         } else {
             let forenames = (req.query.forenames ? "forenames=" + req.query.forenames + "&":"");
-            let surname = (req.query.surname ? "surname=" + req.query.surname : "");
-            let toSend = "" + forenames + surname;
+            let surname = (req.query.surname ? "surname=" + req.query.surname + "&": "");
+            let homeAddress = (req.query.homeAddress ? "homeAddress=" + req.query.homeAddress + "&": "");
+            let dateOfBirth = (req.query.dateOfBirth ? "dateOfBirth=" + req.query.dateOfBirth + "&": "");
+            let toSend = "" + forenames + surname + homeAddress + dateOfBirth;
             console.log("MOBILE 1 " + toSend);
             axios.get(`${mobile_url}${toSend}`, {
                 headers: { username: `${req.query.username}` },
@@ -136,8 +140,11 @@ router.get('/getVehicle', (req, res, next) => {
             res.status(401).send(info.message);
         } else {
             let forenames = (req.query.forenames ? "forenames=" + req.query.forenames + "&":"");
-            let surname = (req.query.surname ? "surname=" + req.query.surname : "");
-            let toSend = "" + forenames + surname;
+            let surname = (req.query.surname ? "surname=" + req.query.surname + "&": "");
+            let homeAddress = (req.query.homeAddress ? "homeAddress=" + req.query.homeAddress + "&": "");
+            let dateOfBirth = (req.query.dateOfBirth ? "dateOfBirth=" + req.query.dateOfBirth + "&": "");
+            let toSend = "" + forenames + surname + homeAddress + dateOfBirth;
+            console.log("Vehicle" + toSend);
 
             axios.get(`${vehicle_url}${toSend}`, {
                 headers: { username: `${req.query.username}` },
