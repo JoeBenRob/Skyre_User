@@ -7,7 +7,6 @@ const citizen_url = "http://core:9001/core/citizen/"
 const finance_url = "http://core:9001/core/finance/"
 const mobile_url = "http://core:9001/core/mobile/"
 const vehicle_url = "http://core:9001/core/anpr/"
-const case_url = "http://core:9001/core/case/"
 
 router.get('/getBasicCitizens', (req, res, next) => {
 
