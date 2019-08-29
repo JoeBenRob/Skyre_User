@@ -19,6 +19,4 @@ module.exports = (sequelize, type) => sequelize.define('user', {
         type: type.STRING,
         allowNull: false,
     },
-    resetPasswordToken: type.STRING,
-    resetPasswordExpires: type.DATE,
 });
